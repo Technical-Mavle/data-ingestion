@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAGAR Data Upload</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f9; }
+        .container { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
+        .hidden { display: none; } /* Utility class to hide elements */
+        input { margin-bottom: 1rem; padding: 0.5rem; width: 80%; }
+        button { padding: 0.5rem 1rem; cursor: pointer; }
+        #status, #loginError { margin-top: 1rem; font-weight: bold; }
+        #loginError { color: red; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="loginSection">
+            <h1>CMLRE Portal Login</h1>
+            <input type="text" id="username" placeholder="Username" required>
+            <br>
+            <input type="password" id="password" placeholder="Password" required>
+            <br>
+            <button id="loginButton">Login</button>
+            <div id="loginError"></div>
+        </div>
+
+        <div id="uploadSection" class="hidden">
+            <h1>Upload Dataset to SAGAR</h1>
+            <input type="file" id="fileInput" />
+            <button id="uploadButton">Upload</button>
+            <div id="status"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="upload.js"></script>
+</body>
+</html>
