@@ -1,8 +1,12 @@
 // In upload.js
 
 // IMPORTANT: Use the 'anon' key, which is safe to expose in a browser.
-const SUPABASE_URL = 'https://oqeribgmlhatwezqutvl.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9xZXJpYmdtbGhhdHdlenF1dHZsIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1ODEyNjUxMiwiZXhwIjoyMDczNzAyNTEyfQ.wWJK5VVTXXsEb8EEYHa4KcMxu6XjP2KB5UBH9fppsIc';
+const SUPABASE_URL = (window.ENV && window.ENV.SUPABASE_URL) || '';
+const SUPABASE_ANON_KEY = (window.ENV && window.ENV.SUPABASE_ANON_KEY) || '';
+
+if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    console.error('Missing Supabase environment variables. Ensure env.js is loaded with SUPABASE_URL and SUPABASE_ANON_KEY.');
+}
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -25,18 +29,19 @@ loginButton.addEventListener('click', () => {
     const username = usernameInput.value;
     const password = passwordInput.value;
 
-    // Check against the hardcoded credentials
-    if (username === 'prasannapal21' && password === 'asdfasdf') {
-        // If correct, hide login and show uploader
+    const expectedUsername = (window.ENV && window.ENV.LOGIN_USERNAME) || '';
+    const expectedPassword = (window.ENV && window.ENV.LOGIN_PASSWORD) || '';
+
+    if (username === expectedUsername && password === expectedPassword) {
         loginSection.classList.add('hidden');
         uploadSection.classList.remove('hidden');
+        loginError.textContent = '';
     } else {
-        // If incorrect, show an error message
         loginError.textContent = 'Invalid username or password.';
     }
 });
 
-// --- Upload Logic (no changes needed here) ---
+// --- Upload Logic ---
 uploadButton.addEventListener('click', async () => {
     const file = fileInput.files[0];
 
