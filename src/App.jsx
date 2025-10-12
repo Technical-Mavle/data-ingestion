@@ -146,6 +146,35 @@ export default function App() {
               </button>
             </div>
             {loginError && <div style={{ marginTop: '1rem', fontWeight: 'bold', color: '#ff6b6b' }}>{loginError}</div>}
+            
+            {/* Temporary Credentials Display */}
+            <div style={{
+              marginTop: '1.5rem',
+              padding: '1rem',
+              background: 'rgba(0,255,136,0.1)',
+              border: '1px solid rgba(0,255,136,0.3)',
+              borderRadius: 12,
+              textAlign: 'center'
+            }}>
+              <p style={{ 
+                margin: '0 0 0.5rem 0', 
+                fontSize: '0.9rem', 
+                color: 'rgba(255,255,255,0.8)',
+                fontWeight: 600
+              }}>
+                Login Credentials:
+              </p>
+              <div style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                gap: '0.25rem',
+                fontSize: '0.85rem',
+                color: 'rgba(255,255,255,0.9)'
+              }}>
+                <div>Username: <span style={{ color: '#00ff88', fontWeight: 700 }}>admin</span></div>
+                <div>Password: <span style={{ color: '#00ff88', fontWeight: 700 }}>admin123</span></div>
+              </div>
+            </div>
           </div>
         ) : isProcessing ? (
           <div style={{ textAlign: 'center', padding: '2rem' }}>
